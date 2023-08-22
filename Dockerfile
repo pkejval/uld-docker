@@ -19,4 +19,5 @@ RUN git clone https://github.com/filo891/ulozto-downloader.git && \
  pip3 install -r requirements.txt
 
 COPY ./run.sh /app
+RUN chmod 755 /app/run.sh
 ENTRYPOINT [ "/app/run.sh" ]
