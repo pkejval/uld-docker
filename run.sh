@@ -19,7 +19,7 @@ if [[ -f "/downloads/download.txt" ]]; then
     echo "Downloading links from /downloads/download.txt"
     for URL in $(cat /downloads/download.txt)
     do
-        python3 /app/ulozto-downloader/ulozto-downloader.py --auto-captcha --output "/downloads" "$@"
+        python3 /app/ulozto-downloader/ulozto-downloader.py --auto-captcha --output "/downloads" '$URL'
     done
 else
     python3 /app/ulozto-downloader/ulozto-downloader.py --auto-captcha --output "/downloads" "$@"
