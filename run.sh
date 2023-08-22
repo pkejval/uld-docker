@@ -9,18 +9,20 @@ trap exit_script SIGTERM
 
 echo ""
 echo Starting FlareSolverr
-echo ""
 
 /app/flaresolverr/flaresolverr >/dev/null &
 
-echo ""
 echo Starting ulozto-downloader
 echo ""
 
-if [[ -f "/app/download.txt" ]]; then
-    python3 /app/ulozto-downloader/ulozto-downloader.py --auto-captcha --enforce-tor --output "/downloads" "$1"
+if [[ -f "/downloads/download.txt" ]]; then
+    echo "Downloading links from /downloads/download.txt"
+    for URL in $(cat /downloads/download.txt)
+    do
+        python3 /app/ulozto-downloader/ulozto-downloader.py --auto-captcha --output "/downloads" "$@"
+    done
 else
-    python3 /app/ulozto-downloader/ulozto-downloader.py --auto-captcha --enforce-tor --output "/downloads" "$1"
+    python3 /app/ulozto-downloader/ulozto-downloader.py --auto-captcha --output "/downloads" "$@"
 fi
 
 exit 0
