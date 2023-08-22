@@ -17,6 +17,10 @@ echo ""
 echo Starting ulozto-downloader
 echo ""
 
-python3 /app/ulozto-downloader/ulozto-downloader.py --auto-captcha --enforce-tor --output "/downloads" "$@"
+if [[ -f "/app/download.txt" ]]; then
+    python3 /app/ulozto-downloader/ulozto-downloader.py --auto-captcha --enforce-tor --output "/downloads" "$1"
+else
+    python3 /app/ulozto-downloader/ulozto-downloader.py --auto-captcha --enforce-tor --output "/downloads" "$1"
+fi
 
 exit 0
