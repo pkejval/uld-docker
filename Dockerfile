@@ -8,7 +8,7 @@ RUN apt update && \
  apt install -y git tor python3 python3-pip jq wget gzip && \
  apt install -y chromium-browser xvfb libnss3 libatk1.0-0 libatk-bridge2.0-0 libcups2 libxkbcommon-x11-0 libxcomposite-dev libxdamage1 libxrandr2 libgbm-dev libpangocairo-1.0-0 libasound2
 
-RUN wget https://github.com/FlareSolverr/FlareSolverr/releases/download/v3.3.2/flaresolverr_linux_x64.tar.gz && \
+RUN wget https://github.com/FlareSolverr/FlareSolverr/releases/download/v3.3.4/flaresolverr_linux_x64.tar.gz && \
  tar xvzf flaresolverr_linux_x64.tar.gz && \
  rm flaresolverr_linux_x64.tar.gz
 
