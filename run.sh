@@ -1,6 +1,6 @@
 #!/bin/bash
 
-OUT_INTERVAL=${OUT_INTERVAL:-10}
+OUT_INTERVAL=${INTERVAL:-10}
 PARTS=${PARTS:-20}
 
 trap exit_script SIGTERM
