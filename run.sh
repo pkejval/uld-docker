@@ -12,7 +12,7 @@ function exit_script() {
 }
 
 function run_uld() {
-    [[ $URL != http* ]] && continue
+    [[ $1 != http* ]] && echo "Error: Invalid URL!" && return
     echo Starting ulozto-downloader for "$1"
     echo ""
 
