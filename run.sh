@@ -4,20 +4,18 @@ OUT_INTERVAL=${INTERVAL:-10}
 PARTS=${PARTS:-20}
 DEBUG=${DEBUG:-0}
 
-if [[ $DEBUG == 1 ]]; then
-	echo "Debug enabled!"
-fi
+[[ $DEBUG == 1 ]] && echo "Debug enabled!"
 
 trap exit_script SIGTERM
 trap exit_script SIGINT
 
 function exit_script() {
-  echo "Stopping script"
-  exit 0
+    echo "Stopping script"
+    exit 0
 }
 
 function run_uld() {
-    [[ $1 != http* ]] && echo "Error: Invalid URL!" && return
+    [[ $1 != http* ]] && echo "Skipping invalid URL $1" && return
     echo Starting ulozto-downloader for "$1"
     echo ""
 
@@ -27,9 +25,7 @@ function run_uld() {
     python3 /app/ulozto-downloader/ulozto-downloader.py --frontend JSON --auto-captcha --parts "$PARTS" --output "/downloads" "$1"
     ) | while read -r OUTPUT
     do
-    	if [[ $DEBUG == 1 ]]; then
-    		echo "$OUTPUT"
-    	fi
+        [[ $DEBUG == 1 ]] && echo "$OUTPUT"
 
         [[ $OUTPUT != \{* ]] && continue
         
@@ -54,7 +50,7 @@ function run_uld() {
             diff=$(($(date '+%s') - "$LAST_OUTPUT"))
             [[ $diff -lt $OUT_INTERVAL ]] && continue
 
-			mapfile -t arr < <(jq -r '.file, .url, .status, .curr_speed, .downloaded, .size, .percent, .remaining' <<< "$OUTPUT")
+            mapfile -t arr < <(jq -r '.file, .url, .status, .curr_speed, .downloaded, .size, .percent, .remaining' <<< "$OUTPUT")
 
             echo ----------
             echo ""

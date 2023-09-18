@@ -22,6 +22,8 @@ Because image isn't supporting inputting args directly to `ulozto-downloader` an
 How many part split download to.
 ### INTERVAL=number
 How often will script report status to STDOUT in seconds.
+### DEBUG=number
+If set to 1 then ALL messages from ulozto-downloader will be shown unfiltered. Use only if you are troubleshooting anything.
 
 ## Downloading multiple URLs
 You can create file called `download.txt` in bind mounted folder `/downloads` and paste URLs to download. Each URL on new line. If `uld-docker` finds this file at startup it will download every URL from this file. 
