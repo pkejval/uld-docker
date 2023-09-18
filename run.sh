@@ -12,7 +12,7 @@ function exit_script() {
 }
 
 function run_uld() {
-    [[ $URL != http* ]] && continue
+    [[ $1 != http* ]] && continue
     echo Starting ulozto-downloader for "$1"
     echo ""
 
