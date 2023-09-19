@@ -26,4 +26,7 @@ How often will script report status to STDOUT in seconds.
 If set to 1 then ALL messages from ulozto-downloader will be shown unfiltered. Use only if you are troubleshooting anything.
 
 ## Downloading multiple URLs
-You can create file called `download.txt` in bind mounted folder `/downloads` and paste URLs to download. Each URL on new line. If `uld-docker` finds this file at startup it will download every URL from this file. 
+You can create file called `download.txt` in bind mounted folder `/downloads` and paste URLs to download. Each URL on new line. If `uld-docker` finds this file at startup it will download every URL from this file.
+
+### Modifying PARTS variable for individual URL
+You can prefix URL with `PARTS=number;https://.....`. Specified number of parts will be used for this individual URL.

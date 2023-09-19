@@ -1,7 +1,7 @@
 #!/bin/bash
 
 OUT_INTERVAL=${INTERVAL:-10}
-PARTS=${PARTS:-20}
+DEFAULT_PARTS=${PARTS:-20}
 DEBUG=${DEBUG:-0}
 
 [[ $DEBUG == 1 ]] && echo "Debug enabled!"
@@ -81,10 +81,13 @@ if [[ -f "/downloads/download.txt" ]]; then
     echo ""
     echo "Downloading links from /downloads/download.txt"
 
-    while IFS= read -r URL
+    for URL in $(cat /downloads/download.txt)
     do
+        PARTS=$DEFAULT_PARTS
+        LINE=$(echo "$URL" | cut -d ";" -f 1)
+        [[ "$LINE" == PARTS=* ]] && eval "$LINE" && echo -n "Set $LINE for " && URL=$(echo "$URL" | cut -d ";" -f 2) && echo "$URL"
         run_uld "$URL"
-    done < /downloads/download.txt
+    done
 else
     run_uld "$1"
 fi
