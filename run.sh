@@ -69,6 +69,8 @@ function run_uld() {
             LAST_OUTPUT=$(date '+%s')
         fi
     done
+
+    echo $(date "+%D %T"): Done downloading "$URL"
 }
 
 echo ""
