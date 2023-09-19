@@ -70,7 +70,7 @@ function run_uld() {
         fi
     done
 
-    echo $(date "+%D %T"): Done downloading "$URL"
+    echo $(date "+%D %T") - Done downloading "$URL"
 }
 
 echo ""
