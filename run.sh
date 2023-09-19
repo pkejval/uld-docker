@@ -79,7 +79,7 @@ echo ""
 
 /app/flaresolverr/flaresolverr >/dev/null &
 
-if [[ -f "/downloads/download.txt" ]]; then
+if [[ -z "$1" ]] && [[ -f "/downloads/download.txt" ]]; then
     echo ""
     echo "Downloading links from /downloads/download.txt"
 
