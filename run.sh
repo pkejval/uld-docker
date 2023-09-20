@@ -70,7 +70,7 @@ function run_uld() {
         fi
     done
 
-    echo $(date "+%D %T") - Done downloading "$URL"
+    echo "$(date "+%D %T")" - Done downloading "$URL"
 }
 
 echo ""
@@ -83,7 +83,7 @@ if [[ -z "$1" ]] && [[ -f "/downloads/download.txt" ]]; then
     echo ""
     echo "Downloading links from /downloads/download.txt"
 
-    for URL in $(cat /downloads/download.txt)
+    for URL in $(< /downloads/download.txt)
     do
         PARTS=$DEFAULT_PARTS
         LINE=$(echo "$URL" | cut -d ";" -f 1)
