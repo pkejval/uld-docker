@@ -18,6 +18,9 @@ RUN git clone https://github.com/filo891/ulozto-downloader.git && \
  sed -i 's/\[auto-captcha\]//g' requirements.txt && \
  pip3 install -r requirements.txt
 
+RUN wget https://raw.githubusercontent.com/torproject/tor/main/src/config/geoip -O /app/geoip.db && \
+ wget https://raw.githubusercontent.com/torproject/tor/main/src/config/geoip6 -O /app/geoip6.db
+
 COPY ./run.sh /app
 RUN chmod 755 /app/run.sh
 ENTRYPOINT [ "/app/run.sh" ]
