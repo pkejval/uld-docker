@@ -3,6 +3,13 @@
 OUT_INTERVAL=${INTERVAL:-10}
 DEFAULT_PARTS=${PARTS:-20}
 DEBUG=${DEBUG:-0}
+ENFORCE_TOR=${ENFORCE_TOR:-0}
+
+if [[ $ENFORCE_TOR -gt 0 ]]; then
+    ENFORCE_TOR=" --enforce-tor "
+else
+    ENFORCE_TOR=""
+fi
 
 [[ $DEBUG == 1 ]] && echo "Debug enabled!"
 
@@ -22,7 +29,7 @@ function run_uld() {
     LAST_OUTPUT=0
 
     (
-    python3 /app/ulozto-downloader/ulozto-downloader.py --frontend JSON --auto-captcha --parts "$PARTS" --output "/downloads" "$1"
+    python3 /app/ulozto-downloader/ulozto-downloader.py $ENFORCE_TOR --frontend JSON --auto-captcha --parts "$PARTS" --output "/downloads" "$1"
     ) | while read -r OUTPUT
     do
         [[ $DEBUG == 1 ]] && echo "$OUTPUT"

@@ -22,6 +22,8 @@ Because image isn't supporting inputting args directly to `ulozto-downloader` an
 How many part split download to.
 ### INTERVAL=number
 How often will script report status to STDOUT in seconds.
+### ENFORCE_TOR=number
+If set to number higher than 0 then it will run ulozto-downloader with `--enforce-tor` argument.
 ### DEBUG=number
 If set to 1 then ALL messages from ulozto-downloader will be shown unfiltered. Use only if you are troubleshooting anything.
 
