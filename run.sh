@@ -80,16 +80,36 @@ function run_uld() {
     echo "$(date "+%D %T")" - Done downloading "$URL"
 }
 
-echo ""
-echo Starting FlareSolverr
-echo ""
+function run_flaresolverr()
+{
+    echo ""
+    echo Starting FlareSolverr and waiting to its startup
+    echo ""
+    STARTED=0
+    TRIES=60
 
-if [[ $DEBUG == 1 ]]; then
-    /app/flaresolverr/flaresolverr &
-else
-    /app/flaresolverr/flaresolverr >/dev/null &
-fi
-sleep 1
+    if [[ $DEBUG == 1 ]]; then
+        /app/flaresolverr/flaresolverr &
+    else
+        /app/flaresolverr/flaresolverr >/dev/null &
+    fi
+
+    until [[ $STARTED -eq 1 ]]
+    do
+        wget -q --spider http://0.0.0.0:8191/health
+        if [[ $? -eq 0 ]]; then
+            STARTED=1
+        else
+            [[ $DEBUG == 1 ]] && echo Flaresolverr still not ready! Waiting 1 second more. $TRIES tries remaining before exit.
+            sleep 1
+        fi
+
+        ((TRIES--))
+        [[ $TRIES -lt 1 ]] && echo "Couldn't start Flaresolverr! Exiting script!" && exit 2
+    done
+}
+
+run_flaresolverr
 
 if [[ -z "$1" ]] && [[ -f "/downloads/download.txt" ]]; then
     echo ""
@@ -103,6 +123,7 @@ if [[ -z "$1" ]] && [[ -f "/downloads/download.txt" ]]; then
         run_uld "$URL"
     done
 else
+    PARTS=$DEFAULT_PARTS
     run_uld "$1"
 fi
 
