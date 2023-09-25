@@ -85,6 +85,7 @@ echo Starting FlareSolverr
 echo ""
 
 /app/flaresolverr/flaresolverr >/dev/null &
+sleep 10
 
 if [[ -z "$1" ]] && [[ -f "/downloads/download.txt" ]]; then
     echo ""
