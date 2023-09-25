@@ -80,8 +80,7 @@ function run_uld() {
     echo "$(date "+%D %T")" - Done downloading "$URL"
 }
 
-function run_flaresolverr()
-{
+function run_flaresolverr() {
     echo ""
     echo Starting FlareSolverr and waiting to its startup
     echo ""
@@ -109,6 +108,12 @@ function run_flaresolverr()
     done
 }
 
+function test_avx() {
+    lscpu | grep avx
+    [[ $? -ne 0 ]] && echo "******* ERROR ******" && echo "Your CPU doesn't support AVX instructions needed for tensorflow to run! Sorry your CPU cannot run this container!" && echo "******* ERROR ******" && exit 5
+}
+
+test_avx
 run_flaresolverr
 
 if [[ -z "$1" ]] && [[ -f "/downloads/download.txt" ]]; then
