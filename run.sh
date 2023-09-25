@@ -84,8 +84,12 @@ echo ""
 echo Starting FlareSolverr
 echo ""
 
-/app/flaresolverr/flaresolverr >/dev/null &
-sleep 10
+if [[ $DEBUG == 1 ]]; then
+    /app/flaresolverr/flaresolverr &
+else
+    /app/flaresolverr/flaresolverr >/dev/null &
+fi
+sleep 1
 
 if [[ -z "$1" ]] && [[ -f "/downloads/download.txt" ]]; then
     echo ""
