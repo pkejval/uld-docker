@@ -29,7 +29,7 @@ function run_uld() {
     LAST_OUTPUT=0
 
     (
-    python3 /app/ulozto-downloader/ulozto-downloader.py $ENFORCE_TOR --frontend JSON --auto-captcha --parts "$PARTS" --output "/downloads" "$1"
+    python3 /app/ulozto-downloader/ulozto-downloader.py $ENFORCE_TOR --yes --frontend JSON --auto-captcha --parts "$PARTS" --output "/downloads" "$1"
     ) | while read -r OUTPUT
     do
         [[ $DEBUG == 1 ]] && echo "$OUTPUT"
