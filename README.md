@@ -12,7 +12,7 @@ In Windows do not forget to change line endings to LF (see: https://stackoverflo
 
 # From dockerhub
 - Run command `docker pull pkejval/uld-docker:main`
-- Run command `docker run pkejval/uld-docker "URL"` where URL is download link. Inputting ulozto-downloader arguments directly is not supported. See **Configuration** section below.
+- Run command `docker run pkejval/uld-docker:main "URL"` where URL is download link. Inputting ulozto-downloader arguments directly is not supported. See **Configuration** section below.
 
 
 # Configuration
